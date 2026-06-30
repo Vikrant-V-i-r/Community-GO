@@ -1,0 +1,8 @@
+API Key
+AQ.Ab8RN6LuIQhvMfKFOgec2iUZVNWt_ER3HAuKzoJ5oo-gGunCsw
+Name
+Gemini API Key
+Project name
+projects/236006070799
+Project number
+236006070799

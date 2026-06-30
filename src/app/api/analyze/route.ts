@@ -36,6 +36,19 @@ function fileToDataUrl(filePath: string): string {
   return `data:${mime};base64,${buffer.toString('base64')}`
 }
 
+function fallback(): IssueAnalysis {
+  return {
+    category: 'OTHER',
+    severity: 'MEDIUM',
+    authorityDept: 'BBMP',
+    title: 'Community Issue Reported',
+    description: 'AI analysis was unavailable. Please review the photo and add a manual description before submitting.',
+    confidence: 0,
+    safetyTips: 'Exercise caution near the affected area.',
+    estimatedImpact: 'Local residents and commuters',
+  }
+}
+
 async function analyzeIssueImage(imagePath: string): Promise<IssueAnalysis> {
   try {
     const zai = await getZAI()
@@ -97,16 +110,7 @@ Rules:
     }
   } catch (err: any) {
     console.error('[AI] analyzeIssueImage failed:', err.message)
-    return {
-      category: 'OTHER',
-      severity: 'MEDIUM',
-      authorityDept: 'BBMP',
-      title: 'Community Issue Reported',
-      description: 'AI analysis was unavailable. Please review the photo and add a manual description before submitting.',
-      confidence: 0,
-      safetyTips: 'Exercise caution near the affected area.',
-      estimatedImpact: 'Local residents and commuters',
-    }
+    return fallback()
   }
 }
 
@@ -137,16 +141,7 @@ export async function POST(req: NextRequest) {
   } catch (err: any) {
     console.error('[/api/analyze] Top-level error:', err.message)
     return NextResponse.json({
-      analysis: {
-        category: 'OTHER',
-        severity: 'MEDIUM',
-        authorityDept: 'BBMP',
-        title: 'Community Issue Reported',
-        description: 'AI analysis was unavailable. Please review the photo and add a manual description before submitting.',
-        confidence: 0,
-        safetyTips: 'Exercise caution near the affected area.',
-        estimatedImpact: 'Local residents and commuters',
-      },
+      analysis: fallback(),
       warning: 'AI service unavailable — using fallback. ' + err.message,
     })
   }
