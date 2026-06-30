@@ -1,0 +1,31 @@
+problem statement  1
+
+The Last-Minute Life Saver
+
+Background
+
+
+Students, professionals, and entrepreneurs frequently miss deadlines, assignments, meetings, bill payments, interviews, and important commitments. Existing productivity tools often rely on passive reminders that are easy to ignore and do little to help users actually complete their tasks.
+
+Challenge
+
+
+Build an AI-powered productivity companion that proactively assists users in planning, prioritizing, and completing tasks before deadlines are missed.
+
+The solution should move beyond traditional reminders and focus on helping users take meaningful action.
+
+Example Features:
+
+Intelligent task prioritization
+AI-powered scheduling assistance
+Personalized productivity recommendations
+Context-aware reminders
+Calendar integration
+Goal and habit tracking
+Voice-enabled assistance
+Autonomous task planning and execution
+
+Evaluation Focus
+
+
+The solution should demonstrate how AI can improve productivity by helping users make better decisions and complete tasks more effectively.

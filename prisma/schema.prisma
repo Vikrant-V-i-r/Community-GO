@@ -1,0 +1,97 @@
+// Community Hero — Pokemon Go style civic issue reporting
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  handle        String    @unique
+  avatar        String    @default("hero-1")
+  bio           String    @default("")
+  coins         Int       @default(50)
+  xp            Int       @default(0)
+  level         Int       @default(1)
+  badges        String    @default("[]") // JSON array of badge codes
+  neighborhood  String    @default("Bengaluru")
+  isCivicAgent  Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  lastActiveAt  DateTime  @default(now())
+  issues        Issue[]
+  updates       IssueUpdate[]
+  verifications Verification[]
+  alerts        Alert[]
+}
+
+model Issue {
+  id                 String   @id @default(cuid())
+  title              String
+  description        String
+  category           String   // POTHOLE | WATER_LEAK | STREETLIGHT | GARBAGE | ROAD_DAMAGE | DRAINAGE | OTHER
+  severity           String   // LOW | MEDIUM | HIGH | CRITICAL
+  status             String   @default("FRESH") // FRESH | WIP | SOLVED
+  lat                Float
+  lng                Float
+  address            String
+  imageUrl           String
+  aiConfidence       Float    @default(0)
+  authorityDept      String   @default("BBMP")
+  reporterId         String
+  reporter           User     @relation(fields: [reporterId], references: [id])
+  verificationsCount Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now())
+  resolvedAt         DateTime?
+  updates            IssueUpdate[]
+  verifications      Verification[]
+  alerts             Alert[]
+}
+
+model IssueUpdate {
+  id        String   @id @default(cuid())
+  issueId   String
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  status    String   // FRESH | WIP | SOLVED
+  comment   String
+  imageUrl  String?
+  createdAt DateTime @default(now())
+}
+
+model Verification {
+  id        String   @id @default(cuid())
+  issueId   String
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([issueId, userId])
+}
+
+model Alert {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String   // NEW_ISSUE | STATUS_CHANGE | BADGE_EARNED | VERIFICATION | NEARBY
+  message   String
+  issueId   String?
+  issue     Issue?   @relation(fields: [issueId], references: [id])
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuthorityContact {
+  id     String @id @default(cuid())
+  name   String
+  dept   String // BBMP | TRAFFIC | WATER_BOARD | ELECTRICITY | FIRE | POLICE
+  phone  String
+  email  String
+  area   String
+  icon   String
+}

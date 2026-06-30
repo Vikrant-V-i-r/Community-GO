@@ -1,0 +1,12 @@
+install & use skills 
+
+https://github.com/affaan-m/ECC.git
+https://github.com/obra/superpowers.git
+https://github.com/multica-ai/andrej-karpathy-skills.git
+https://github.com/anthropics/skills.git
+https://github.com/JuliusBrussee/caveman.git
+https://github.com/AlexsJones/llmfit.git
+https://github.com/addyosmani/agent-skills.git
+https://github.com/Leonxlnx/taste-skill.git
+https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git
+

@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.env*.local
+dev.log
+server.log
+*.md
+upload/
+download/
+skills/
+.zscripts/
+db/
+public/uploads/issue-*

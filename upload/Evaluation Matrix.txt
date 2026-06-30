@@ -1,0 +1,30 @@
+Evaluation Matrix
+
+All submissions will be evaluated based on the criteria specified in the evaluation matrix below.
+
+
+The organizers reserve the right to verify the originality, functionality, and eligibility of any submission and may request additional evidence if required.
+
+
+The jury's decision regarding shortlisting, rankings, and winner selection shall be final and binding.
+
+
+Criteria
+Weightage
+Problem Solving & Impact
+20%
+Agentic Depth
+20%
+Innovation & Creativity
+20%
+Usage of Google Technologies
+15%
+Product Experience & Design
+10%
+Technical Implementation
+10%
+Completeness & Usability
+5%
+
+
+

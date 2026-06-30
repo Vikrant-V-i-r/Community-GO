@@ -1,0 +1,27 @@
+Submission Requirements
+
+
+Mandatory:
+
+To be eligible for evaluation, each participant must submit the following:
+
+Deployed Application Link
+A publicly accessible and fully functional version of the application, deployed on Google Cloud. The submitted link must remain active and accessible throughout the evaluation period.
+
+
+Refer to the below docs -
+https://ai.google.dev/gemini-api/docs/aistudio-deploying 
+https://docs.cloud.google.com/deploy/docs
+
+
+GitHub Repository Link
+Source code repository containing the project code and documentation.
+
+
+Project Description (Google Doc Link) - Submit a Google Doc containing the following details:
+Problem Statement Selected
+Solution Overview
+Key Features
+Technologies Used
+Google Technologies Utilized
+Please ensure that the document is accessible to anyone with the link and remains available throughout the evaluation period. Organizers may review the document and its version history as part of the evaluation process.
