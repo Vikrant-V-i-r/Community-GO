@@ -6,7 +6,10 @@ FROM oven/bun:1.3 AS deps
 WORKDIR /app
 
 COPY package.json bun.lock* ./
+COPY prisma ./prisma
 RUN bun install --frozen-lockfile
+# Generate Prisma client so the build can compile old API routes that still import it
+RUN bun run db:generate
 
 # ---- Stage 2: Build ----
 FROM oven/bun:1.3 AS builder
@@ -28,7 +31,6 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=8080
 ENV DATABASE_URL=file:/app/data/community-go.db
-# GEMINI_API_KEY is set via Cloud Run environment variables (not baked in for security)
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
@@ -36,10 +38,12 @@ RUN addgroup --system --gid 1001 nodejs && \
 RUN mkdir -p /app/data /app/public/uploads && \
     chown -R nextjs:nodejs /app/data /app/public/uploads
 
-# Copy standalone build output
+# Copy standalone build output + Prisma client (needed at runtime for old API routes)
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@prisma ./node_modules/@prisma
 
 USER nextjs
 

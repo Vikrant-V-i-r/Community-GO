@@ -1,13 +1,15 @@
 node_modules
 .next
 .git
+.env
 .env*.local
 dev.log
 server.log
-*.md
 upload/
 download/
 skills/
 .zscripts/
 db/
+community-go/
+project-doc/
 public/uploads/issue-*
